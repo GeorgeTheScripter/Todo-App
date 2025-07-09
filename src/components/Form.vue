@@ -10,15 +10,12 @@
 
     <form v-else class="flex gap-2" @submit.prevent="addTask">
       <div class="flex flex-col w-full gap-1">
-        <input
-          v-model="newTask.title"
-          placeholder="title"
-          class="bg-blue-100 w-full py-2 px-4 rounded-xl"
-        />
-        <input
-          v-model="newTask.description"
-          placeholder="description"
-          class="bg-blue-100 w-full py-2 px-4 rounded-xl"
+        <FormField
+          v-for="field in fields"
+          :key="field.id"
+          v-model="form[field.key].value"
+          :placeholder="form[field.key].placeholder"
+          :maxLength="form[field.key].maxLength"
         />
       </div>
 
@@ -30,9 +27,28 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
+import FormField from "./FormField.vue";
 
-const newTask = reactive({ title: "", description: "" });
+const form = reactive({
+  title: {
+    id: 1,
+    value: "",
+    placeholder: "title",
+    maxLength: 50,
+  },
+  descr: {
+    id: 2,
+    value: "",
+    placeholder: "descr",
+    maxLength: 250,
+  },
+});
+
+const fields = [
+  { key: "title", id: 1 },
+  { key: "descr", id: 2 },
+];
 
 let isAdded = ref(true);
 
@@ -43,9 +59,13 @@ const openForm = () => {
 const emit = defineEmits(["addTask"]);
 
 const addTask = () => {
-  emit("addTask", { ...newTask, id: Date.now() });
-  newTask.title = "";
-  newTask.description = "";
+  emit("addTask", {
+    title: form.title.value,
+    description: form.descr.value,
+    id: Date.now(),
+  });
+  form.title.value = "";
+  form.descr.value = "";
   isAdded.value = true;
 };
 </script>

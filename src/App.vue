@@ -18,7 +18,7 @@
 <script setup>
 import { ref, reactive } from "vue";
 
-import Header from "@/components/Header.vue";
+import Header from "./components/Header.vue";
 import Form from "@/components/Form.vue";
 import PostList from "@/components/PostList.vue";
 
