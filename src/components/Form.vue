@@ -7,6 +7,7 @@
     >
       + Add new task
     </button>
+
     <form v-else class="flex gap-2" @submit.prevent="addTask">
       <div class="flex flex-col w-full gap-1">
         <input
@@ -30,13 +31,16 @@
 
 <script setup>
 import { reactive, ref } from "vue";
+
 const newTask = reactive({ title: "", description: "" });
-const emit = defineEmits(["addTask"]);
+
 let isAdded = ref(true);
 
 const openForm = () => {
   isAdded.value = false;
 };
+
+const emit = defineEmits(["addTask"]);
 
 const addTask = () => {
   emit("addTask", { ...newTask, id: Date.now() });
