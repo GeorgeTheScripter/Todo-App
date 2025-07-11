@@ -62,6 +62,7 @@ const addTask = () => {
   emit("addTask", {
     title: form.title.value,
     description: form.descr.value,
+    isDone: false,
     id: Date.now(),
   });
   form.title.value = "";

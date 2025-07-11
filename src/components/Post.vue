@@ -8,7 +8,7 @@
 
       <div class="flex gap-1">
         <button class="px-3 py-2 bg-blue-200 rounded-xl" @click="handleDelete">
-          done
+          {{ btnText }}
         </button>
       </div>
     </div>
@@ -16,12 +16,18 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
+
 const props = defineProps({
   task: {
     type: Object,
     required: true,
     default: () => {},
   },
+});
+
+const btnText = computed(() => {
+  return props.task.isDone ? "Delete" : "Done";
 });
 
 const emit = defineEmits(["delete"]);
