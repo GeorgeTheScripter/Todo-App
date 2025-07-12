@@ -1,7 +1,7 @@
 <template>
   <div class="w-[960px] mx-auto mt-[120px] flex flex-col gap-4">
     <div class="flex justify-between text-3xl">
-      <h1>All tasks</h1>
+      <h1>Active tasks</h1>
       <span>{{ active.length }}</span>
     </div>
 

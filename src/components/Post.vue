@@ -16,6 +16,14 @@
         >
           {{ btnText }}
         </button>
+
+        <button
+          v-if="props.task.isDone"
+          class="px-3 py-2 bg-blue-200 rounded-xl cursor-pointer"
+          @click.stop="handleReturn(props.task.id)"
+        >
+          Return
+        </button>
       </div>
     </div>
   </div>
@@ -38,10 +46,14 @@ const btnText = computed(() => {
   return props.task.isDone ? "Delete" : "Done";
 });
 
-const emit = defineEmits(["move"]);
+const emit = defineEmits(["move", "return"]);
 
 const handleMove = (id) => {
   emit("move", id);
+};
+
+const handleReturn = (id) => {
+  emit("return", id);
 };
 
 const openPopup = () => {

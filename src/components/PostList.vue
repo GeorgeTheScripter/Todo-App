@@ -5,6 +5,7 @@
       :key="task.id"
       :task="task"
       @move="handleMove(task.id)"
+      @return="handleReturn(task.id)"
     />
   </div>
 </template>
@@ -20,9 +21,13 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["move"]);
+const emit = defineEmits(["move", "return"]);
 
 const handleMove = (id) => {
   emit("move", id);
+};
+
+const handleReturn = (id) => {
+  emit("return", id);
 };
 </script>

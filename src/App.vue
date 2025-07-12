@@ -41,6 +41,15 @@ provide("tasks", {
       done.value = done.value.filter((elem) => elem.id !== id);
     },
 
+    handleReturn(id) {
+      const idx = done.value.findIndex((elem) => elem.id === id);
+
+      if (idx !== -1) {
+        const [doneTask] = done.value.splice(idx, 1);
+        active.value.push({ ...doneTask, isDone: false });
+      }
+    },
+
     openPopup(post) {
       selectedPost.value = post;
       isPopupOpened.value = true;

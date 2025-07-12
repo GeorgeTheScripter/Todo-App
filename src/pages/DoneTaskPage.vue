@@ -5,7 +5,11 @@
       <span>{{ done.length }}</span>
     </div>
 
-    <PostList :tasks="done" @move="methods.handleDelete" />
+    <PostList
+      :tasks="done"
+      @move="methods.handleDelete"
+      @return="methods.handleReturn"
+    />
   </div>
 </template>
 
