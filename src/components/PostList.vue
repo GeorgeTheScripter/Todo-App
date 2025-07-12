@@ -4,7 +4,7 @@
       v-for="task in tasks"
       :key="task.id"
       :task="task"
-      @delete="handleDelete"
+      @move="handleMove(task.id)"
     />
   </div>
 </template>
@@ -20,9 +20,9 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["delete"]);
+const emit = defineEmits(["move"]);
 
-const handleDelete = (id) => {
-  emit("delete", id);
+const handleMove = (id) => {
+  emit("move", id);
 };
 </script>

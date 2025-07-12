@@ -3,6 +3,7 @@
     <Header />
 
     <RouterView />
+    <Popup v-if="isPopupOpened" :post="selectedPost" @close="closePopup" />
   </div>
 </template>
 
@@ -10,13 +11,18 @@
 import { ref, reactive, provide } from "vue";
 
 import Header from "@/components/Header.vue";
+import Popup from "@/components/Popup.vue";
 
 const active = ref([]);
 const done = ref([]);
+const isPopupOpened = ref(false);
+const selectedPost = ref(null);
 
 provide("tasks", {
   active: active,
   done: done,
+  isPopupOpened: isPopupOpened,
+  selectedPost: selectedPost,
   methods: {
     addNewTask(newTask) {
       active.value.push(newTask);
@@ -33,6 +39,16 @@ provide("tasks", {
 
     handleDelete(id) {
       done.value = done.value.filter((elem) => elem.id !== id);
+    },
+
+    openPopup(post) {
+      selectedPost.value = post;
+      isPopupOpened.value = true;
+    },
+
+    closePopup() {
+      isPopupOpened.value = false;
+      selectedPost.value = null;
     },
   },
 });

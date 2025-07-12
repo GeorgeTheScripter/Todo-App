@@ -1,5 +1,5 @@
 <template>
-  <header class="w-full flex justify-center bg-blue-800 text-white">
+  <header class="w-full flex justify-center bg-blue-800 text-white fixed top-0">
     <div class="w-[960px] py-[20px] flex justify-between items-center">
       <div class="text-5xl">Simple Todo App</div>
 
@@ -7,12 +7,12 @@
         <RouterLink
           v-for="link in links"
           :key="link.text"
+          :to="link.path"
           class="py-2 px-3 rounded-xl text-blue-800"
           :class="{
             'bg-white': $route.path !== link.path,
             'bg-blue-200': $route.path === link.path,
           }"
-          :to="link.path"
         >
           {{ link.text }}
         </RouterLink>
