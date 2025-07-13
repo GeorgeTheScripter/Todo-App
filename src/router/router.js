@@ -1,11 +1,13 @@
 import { createMemoryHistory, createRouter } from "vue-router";
 
-import AllTaskPage from "@/pages/AllTaskPage.vue";
+import ActiveTaskPage from "@/pages/ActiveTaskPage.vue";
 import DoneTaskPage from "@/pages/DoneTaskPage.vue";
+import DeletedTaskPage from "../pages/DeletedTaskPage.vue";
 
 const routes = [
-  { path: "/", component: AllTaskPage },
+  { path: "/", component: ActiveTaskPage },
   { path: "/done", component: DoneTaskPage },
+  { path: "/delete", component: DeletedTaskPage },
 ];
 
 const router = createRouter({

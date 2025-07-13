@@ -20,9 +20,7 @@
       <div class="self-end">
         <p class="text-[18px]/[60%] flex items-center gap-2">
           status:
-          <span :class="statusClass">{{
-            props.post.isDone ? "Done" : "Active"
-          }}</span>
+          <span :class="statusClass">{{ props.post.status }}</span>
         </p>
       </div>
     </div>
@@ -44,9 +42,12 @@ const { methods } = inject("tasks");
 
 const statusClass = computed(() => {
   const base = "block py-2 px-3  rounded-xl ";
-  const status = props.post.isDone
-    ? " bg-green-200 text-green-400"
-    : " bg-red-200 text-red-400";
+  const status =
+    props.post.status === "done"
+      ? " bg-green-200 text-green-400"
+      : " bg-red-200 text-red-400";
   return base + status;
 });
+
+const ststusText = computed(() => {});
 </script>

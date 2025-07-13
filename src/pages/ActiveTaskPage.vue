@@ -1,17 +1,20 @@
 <template>
   <div class="w-[960px] mx-auto mt-[120px] flex flex-col gap-4">
     <div class="flex justify-between text-3xl">
-      <h1>Done tasks</h1>
-      <span>{{ done.length }}</span>
+      <h1>Active tasks</h1>
+      <span>{{ active.length }}</span>
     </div>
 
-    <PostList :tasks="done" />
+    <Form @addTask="methods.addNewTask" />
+
+    <PostList :tasks="active" />
   </div>
 </template>
 
 <script setup>
 import { inject } from "vue";
 import PostList from "@/components/PostList.vue";
+import Form from "@/components/Form.vue";
 
-const { done } = inject("tasks");
+const { active, methods } = inject("tasks");
 </script>

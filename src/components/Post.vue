@@ -1,7 +1,7 @@
 <template>
   <div
     class="p-4 bg-blue-100 rounded-xl flex flex-col gap-2"
-    @click.stop="openPopup"
+    @click.stop="methods.openPopup(task)"
   >
     <h3 class="text-xl font-medium">{{ props.task.title }}</h3>
     <div class="flex flex-col gap-5">
@@ -11,18 +11,27 @@
 
       <div class="flex gap-1">
         <button
+          v-if="props.task.status === TASK_STATUS.ACTIVE"
           class="px-3 py-2 bg-blue-200 rounded-xl cursor-pointer"
-          @click.stop="handleMove(props.task.id)"
+          @click.stop="methods.moveToDone(task.id)"
         >
-          {{ btnText }}
+          Mark as done
         </button>
 
         <button
-          v-if="props.task.isDone"
+          v-if="props.task.status === TASK_STATUS.DONE"
           class="px-3 py-2 bg-blue-200 rounded-xl cursor-pointer"
-          @click.stop="handleReturn(props.task.id)"
+          @click.stop="methods.handleReturn(task.id)"
         >
           Return
+        </button>
+
+        <button
+          v-if="props.task.status === TASK_STATUS.DONE"
+          class="px-3 py-2 bg-blue-200 rounded-xl cursor-pointer"
+          @click.stop="methods.handleDelete(task.id)"
+        >
+          Delete
         </button>
       </div>
     </div>
@@ -40,23 +49,5 @@ const props = defineProps({
   },
 });
 
-const { methods } = inject("tasks");
-
-const btnText = computed(() => {
-  return props.task.isDone ? "Delete" : "Done";
-});
-
-const emit = defineEmits(["move", "return"]);
-
-const handleMove = (id) => {
-  emit("move", id);
-};
-
-const handleReturn = (id) => {
-  emit("return", id);
-};
-
-const openPopup = () => {
-  methods.openPopup(props.task);
-};
+const { TASK_STATUS, methods } = inject("tasks");
 </script>

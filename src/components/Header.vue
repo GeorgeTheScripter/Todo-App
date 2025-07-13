@@ -29,5 +29,6 @@ const route = useRoute();
 const links = ref([
   { path: "/", text: "All" },
   { path: "/done", text: "Completed" },
+  { path: "/delete", text: "Deleted" },
 ]);
 </script>

@@ -13,19 +13,28 @@ import { ref, reactive, provide } from "vue";
 import Header from "@/components/Header.vue";
 import Popup from "@/components/Popup.vue";
 
+const TASK_STATUS = {
+  ACTIVE: "active",
+  DONE: "done",
+  DELETED: "deleted",
+};
+
 const active = ref([]);
 const done = ref([]);
+const deleted = ref([]);
 const isPopupOpened = ref(false);
 const selectedPost = ref(null);
 
 provide("tasks", {
   active: active,
   done: done,
+  deleted: deleted,
   isPopupOpened: isPopupOpened,
   selectedPost: selectedPost,
+  TASK_STATUS: TASK_STATUS,
   methods: {
     addNewTask(newTask) {
-      active.value.push(newTask);
+      active.value.push({ ...newTask, status: TASK_STATUS.ACTIVE });
     },
 
     moveToDone(id) {
@@ -33,12 +42,17 @@ provide("tasks", {
 
       if (idx !== -1) {
         const [doneTask] = active.value.splice(idx, 1);
-        done.value.push({ ...doneTask, isDone: true });
+        done.value.push({ ...doneTask, status: TASK_STATUS.DONE });
       }
     },
 
     handleDelete(id) {
-      done.value = done.value.filter((elem) => elem.id !== id);
+      const idx = done.value.findIndex((elem) => elem.id === id);
+
+      if (idx !== -1) {
+        const [doneTask] = done.value.splice(idx, 1);
+        deleted.value.push({ ...doneTask, status: TASK_STATUS.DELETED });
+      }
     },
 
     handleReturn(id) {
@@ -46,7 +60,7 @@ provide("tasks", {
 
       if (idx !== -1) {
         const [doneTask] = done.value.splice(idx, 1);
-        active.value.push({ ...doneTask, isDone: false });
+        active.value.push({ ...doneTask, status: TASK_STATUS.ACTIVE });
       }
     },
 
