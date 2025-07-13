@@ -3,32 +3,32 @@
     class="p-4 bg-blue-100 rounded-xl flex flex-col gap-2"
     @click.stop="methods.openPopup(task)"
   >
-    <h3 class="text-xl font-medium">{{ props.task.title }}</h3>
+    <h3 class="text-xl font-medium">{{ task.title }}</h3>
     <div class="flex flex-col gap-5">
       <p>
-        {{ props.task.description }}
+        {{ task.description }}
       </p>
 
       <div class="flex gap-1">
         <button
-          v-if="props.task.status === TASK_STATUS.ACTIVE"
-          class="px-3 py-2 bg-blue-200 rounded-xl cursor-pointer"
+          v-if="task.status === TASK_STATUS.ACTIVE"
+          :class="`px-3 py-2 rounded-xl cursor-pointer ${COLORS.DONE}`"
           @click.stop="methods.moveToDone(task.id)"
         >
           Mark as done
         </button>
 
         <button
-          v-if="props.task.status === TASK_STATUS.DONE"
-          class="px-3 py-2 bg-blue-200 rounded-xl cursor-pointer"
+          v-if="task.status === TASK_STATUS.DONE"
+          :class="`px-3 py-2 rounded-xl cursor-pointer ${COLORS.RETURN}`"
           @click.stop="methods.handleReturn(task.id)"
         >
           Return
         </button>
 
         <button
-          v-if="props.task.status === TASK_STATUS.DONE"
-          class="px-3 py-2 bg-blue-200 rounded-xl cursor-pointer"
+          v-if="task.status === TASK_STATUS.DONE"
+          :class="`px-3 py-2 rounded-xl cursor-pointer ${COLORS.DELETE}`"
           @click.stop="methods.handleDelete(task.id)"
         >
           Delete
@@ -49,5 +49,5 @@ const props = defineProps({
   },
 });
 
-const { TASK_STATUS, methods } = inject("tasks");
+const { methods, TASK_STATUS, COLORS } = inject("tasks");
 </script>

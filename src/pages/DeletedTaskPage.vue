@@ -5,7 +5,7 @@
       <span>{{ deleted.length }}</span>
     </div>
 
-    <PostList :tasks="deleted" />
+    <PostList class="opacity-40" :tasks="deleted" />
   </div>
 </template>
 

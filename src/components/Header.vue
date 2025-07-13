@@ -27,7 +27,7 @@ import { ref } from "vue";
 
 const route = useRoute();
 const links = ref([
-  { path: "/", text: "All" },
+  { path: "/", text: "Active" },
   { path: "/done", text: "Completed" },
   { path: "/delete", text: "Deleted" },
 ]);

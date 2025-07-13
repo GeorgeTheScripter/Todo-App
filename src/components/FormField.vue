@@ -1,6 +1,7 @@
 <template>
   <div class="relative">
     <input
+      :name="placeholder"
       :value="modelValue"
       @input="updateInput($event.target.value)"
       :placeholder="placeholder"
