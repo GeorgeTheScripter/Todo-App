@@ -3,7 +3,7 @@
     <button
       v-if="isAdded"
       @click="openForm"
-      class="bg-blue-800 text-white w-full rounded-xl cursor-pointer py-6"
+      class="bg-blue-800 dark:bg-slate-800 text-white w-full rounded-xl cursor-pointer py-6"
     >
       + Add new task
     </button>
@@ -19,7 +19,9 @@
         />
       </div>
 
-      <button class="bg-blue-800 text-white w-[80px] rounded-xl cursor-pointer">
+      <button
+        class="bg-blue-800 dark:bg-slate-800 text-white w-[80px] rounded-xl cursor-pointer"
+      >
         +
       </button>
     </form>

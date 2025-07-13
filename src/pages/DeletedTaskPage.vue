@@ -1,6 +1,8 @@
 <template>
-  <div class="w-[960px] mx-auto mt-[120px] flex flex-col gap-4">
-    <div class="flex justify-between text-3xl">
+  <div class="w-[960px] mx-auto mt-[88px] flex flex-col gap-4 pt-8">
+    <div
+      class="flex justify-between text-3xl text-blue-800 dark:text-slate-200"
+    >
       <h1>Deleted tasks</h1>
       <span>{{ deleted.length }}</span>
     </div>

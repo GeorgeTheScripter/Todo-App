@@ -1,9 +1,9 @@
 import { ref } from "vue";
 
 export const TASK_STATUS = {
-  ACTIVE: "active",
-  DONE: "done",
-  DELETED: "deleted",
+  ACTIVE: "Active",
+  DONE: "Completed",
+  DELETED: "Deleted",
 };
 
 export const COLORS = {

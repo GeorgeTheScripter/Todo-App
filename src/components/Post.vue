@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-4 bg-blue-100 rounded-xl flex flex-col gap-2"
+    class="p-4 bg-blue-100 dark:bg-slate-800 rounded-xl flex flex-col gap-2 text-blue-800 dark:text-slate-200"
     @click.stop="methods.openPopup(task)"
   >
     <h3 class="text-xl font-medium">{{ task.title }}</h3>
@@ -15,7 +15,7 @@
           :class="`px-3 py-2 rounded-xl cursor-pointer ${COLORS.DONE}`"
           @click.stop="methods.moveToDone(task.id)"
         >
-          Mark as done
+          Mark as complete
         </button>
 
         <button

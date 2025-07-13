@@ -6,7 +6,7 @@
   >
     <div
       @click.stop
-      class="bg-white rounded-xl p-2 w-[560px] h-[250px] flex flex-col justify-between"
+      class="bg-blue-100 dark:bg-slate-800 rounded-xl p-2 w-[560px] h-[250px] flex flex-col justify-between text-blue-800 dark:text-slate-200"
     >
       <div class="flex flex-col pl-3">
         <span
@@ -21,7 +21,7 @@
       <div class="self-end">
         <p class="text-[18px]/[60%] flex items-center gap-2">
           status:
-          <span :class="`block py-2 px-3  rounded-xl ${statusColor}`">{{
+          <span :class="`block py-2 px-3  rounded-md ${statusColor}`">{{
             selectedPost.status
           }}</span>
         </p>
