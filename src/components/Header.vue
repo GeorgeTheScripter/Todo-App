@@ -1,6 +1,6 @@
 <template>
   <header
-    class="w-full flex justify-center bg-blue-800 dark:bg-slate-800 text-white fixed top-0"
+    class="w-full flex justify-center bg-blue-800 dark:bg-slate-800 text-blue-200 dark:text-slate-200 fixed top-0 z-50"
   >
     <div class="w-[960px] py-[20px] flex justify-between items-center">
       <div class="text-5xl">Simple Todo App</div>
