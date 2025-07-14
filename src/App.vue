@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-blue-200 dark:bg-slate-700 h-[calc(100vh-88px)]">
+  <div class="bg-blue-200 dark:bg-slate-700 h-full">
     <Header />
 
     <RouterView />

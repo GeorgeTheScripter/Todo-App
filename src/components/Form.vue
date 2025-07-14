@@ -61,14 +61,16 @@ const openForm = () => {
 const emit = defineEmits(["addTask"]);
 
 const addTask = () => {
-  emit("addTask", {
-    title: form.title.value,
-    description: form.descr.value,
-    isDone: false,
-    id: Date.now(),
-  });
-  form.title.value = "";
-  form.descr.value = "";
-  isAdded.value = true;
+  if (form.title.value) {
+    emit("addTask", {
+      title: form.title.value,
+      description: form.descr.value,
+      isDone: false,
+      id: Date.now(),
+    });
+    form.title.value = "";
+    form.descr.value = "";
+    isAdded.value = true;
+  }
 };
 </script>
