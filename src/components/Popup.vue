@@ -1,7 +1,7 @@
 <template>
   <div
-    v-if="selectedPost"
-    @click.stop="methods.closePopup()"
+    v-if="tasks.selectedPost.value"
+    @click.stop="tasks.methods.closePopup()"
     class="top-0 bottom-0 right-0 left-0 fixed flex justify-center items-center bg-[rgba(0,0,0,0.5)]"
   >
     <div
@@ -10,7 +10,7 @@
     >
       <div class="flex flex-col h-full pl-3">
         <span
-          @click.stop="methods.closePopup()"
+          @click.stop="tasks.methods.closePopup()"
           class="self-end cursor-pointer w-[20px] h-[20px] text-red-400 flex items-center justify-center text-[20px]"
           >&times;</span
         >
@@ -40,7 +40,7 @@
               <p class="text-[18px]/[60%] flex items-center gap-2">
                 status:
                 <span :class="`block py-2 px-3  rounded-md ${statusColor}`">{{
-                  selectedPost.status
+                  tasks.selectedPost.value?.status
                 }}</span>
               </p>
             </div>
@@ -55,13 +55,18 @@
   </div>
 </template>
 
-<script setup>
-import Form from "./Form.vue";
-import { inject, computed, ref, watch } from "vue";
+<script setup lang="ts">
+import { inject, computed, ref, watch, ComputedRef, Ref } from "vue";
+import {
+  tasksKey,
+  TypeTaskStatus,
+  TypeTask,
+  type ProvidedTasks,
+} from "@/composables/useTasks";
 
-const { selectedPost, methods, TASK_STATUS, COLORS } = inject("tasks");
+const tasks: ProvidedTasks = inject(tasksKey)!;
 
-const editablePost = ref({
+const editablePost = ref<TypeTask>({
   title: "",
   description: "",
   id: null,
@@ -69,7 +74,7 @@ const editablePost = ref({
 });
 
 watch(
-  selectedPost,
+  tasks.selectedPost,
   (newValue) => {
     if (newValue) {
       editablePost.value = { ...newValue };
@@ -79,25 +84,28 @@ watch(
 );
 
 const saveChanges = () => {
-  if (!selectedPost.value) return;
-  if (editablePost.value.title === "" || editablePost.value.title === "") {
+  if (!tasks.selectedPost.value) return;
+  if (
+    editablePost.value.title === "" ||
+    editablePost.value.description === ""
+  ) {
     alert("Заполните поля");
   } else {
-    Object.assign(selectedPost.value, editablePost.value);
-    methods.closePopup();
+    Object.assign(tasks.selectedPost.value, editablePost.value);
+    tasks.methods.closePopup();
   }
 };
 
-const statusColor = computed(() => {
+const statusColor: ComputedRef<string> = computed(() => {
   if (!editablePost.value) return "";
 
   switch (editablePost.value.status) {
-    case TASK_STATUS.DONE:
-      return COLORS.DONE;
-    case TASK_STATUS.ACTIVE:
-      return COLORS.ACTIVE;
-    case TASK_STATUS.DELETED:
-      return COLORS.DELETE;
+    case tasks.TASK_STATUS.DONE:
+      return tasks.COLORS.DONE;
+    case tasks.TASK_STATUS.ACTIVE:
+      return tasks.COLORS.ACTIVE;
+    case tasks.TASK_STATUS.DELETED:
+      return tasks.COLORS.DELETE;
     default:
       return "bg-gray-200 text-gray-500";
   }

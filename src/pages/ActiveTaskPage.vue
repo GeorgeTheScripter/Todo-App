@@ -15,8 +15,10 @@
 
 <script setup>
 import { inject } from "vue";
+
+import { tasksKey } from "@/composables/useTasks";
 import PostList from "@/components/PostList.vue";
 import Form from "@/components/Form.vue";
 
-const { active, methods } = inject("tasks");
+const { active, methods } = inject(tasksKey);
 </script>

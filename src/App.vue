@@ -7,16 +7,21 @@
   </div>
 </template>
 
-<script setup>
-import { provide } from "vue";
+<script setup lang="ts">
+import { provide, InjectionKey } from "vue";
 
 import Header from "@/components/Header.vue";
 import Popup from "@/components/Popup.vue";
 
 import useTasks from "@/composables/useTasks";
-import { TASK_STATUS, COLORS } from "@/composables/useTasks";
+import {
+  type TypeUseTaskReturn,
+  TASK_STATUS,
+  COLORS,
+  tasksKey,
+} from "@/composables/useTasks";
 
-const tasks = useTasks();
+const tasks: TypeUseTaskReturn = useTasks();
 
-provide("tasks", { ...tasks, TASK_STATUS, COLORS });
+provide(tasksKey, { ...tasks, TASK_STATUS, COLORS });
 </script>

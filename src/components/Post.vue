@@ -39,7 +39,8 @@
 </template>
 
 <script setup>
-import { computed, inject } from "vue";
+import { inject } from "vue";
+import { tasksKey } from "@/composables/useTasks";
 
 const props = defineProps({
   task: {
@@ -49,5 +50,5 @@ const props = defineProps({
   },
 });
 
-const { methods, TASK_STATUS, COLORS } = inject("tasks");
+const { methods, TASK_STATUS, COLORS } = inject(tasksKey);
 </script>

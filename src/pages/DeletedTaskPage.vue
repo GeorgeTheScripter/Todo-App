@@ -14,6 +14,7 @@
 <script setup>
 import { inject } from "vue";
 import PostList from "@/components/PostList.vue";
+import { tasksKey } from "@/composables/useTasks";
 
-const { deleted } = inject("tasks");
+const { deleted } = inject(tasksKey);
 </script>
